@@ -1,4 +1,5 @@
-7/21/2020 - Testing git
+7/21/2020 -[OK] Git test Legion to NUC
+7/21/2020 - Git test NUC to Legion
 
 7/11/2020 - Got clone of media-server for Legion.
 
