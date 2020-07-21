@@ -1,3 +1,5 @@
+7/21/2020 - Testing git
+
 7/11/2020 - Got clone of media-server for Legion.
 
 2/28/2020 - Status
