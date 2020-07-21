@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from audios.models import Audio, Author
+from videos.models import Video, Author
 from django.views import generic
 from django.http import HttpResponse, FileResponse, JsonResponse
 import pathlib
@@ -7,21 +7,21 @@ import os
 
 
 def index(request):
-    num_audios = Audio.objects.all().count()
+    num_videos = Video.objects.all().count()
     num_authors = Author.objects.all().count()
 
     context = {
-        'num_audios': num_audios,
+        'num_videos': num_videos,
         'num_authors': num_authors,
     }
 
     return render(request, 'index.html', context=context)
 
-class AudioListView(generic.ListView):
-    model = Audio
+class VideoListView(generic.ListView):
+    model = Video
 
-class AudioDetailView(generic.DetailView):
-    model = Audio
+class VideoDetailView(generic.DetailView):
+    model = Video
 
 class AuthorListView(generic.ListView):
     model = Author
@@ -88,10 +88,10 @@ class AuthorDetailView(generic.DetailView):
 # ToDo - These can be simplified into a single method that tests
 # and constructs path as needed.
 # Serve from share root.
-def getAudioFilePath0(request, filename):
-    audio = pathlib.Path.home() / 'sharefromwindows' / filename
+def getVideoFilePath0(request, filename):
+    video = pathlib.Path.home() / 'videowindowsshare' / filename
     path = ""
-    for part in audio.parts:
+    for part in video.parts:
         if part != "/":
             path += "/" + part
     
@@ -99,10 +99,10 @@ def getAudioFilePath0(request, filename):
     return response
 
 # Serve from one level below share root.
-def getAudioFilePath1(request, path1, filename):
-    audio = pathlib.Path.home() / 'sharefromwindows' / path1 / filename
+def getVideoFilePath1(request, path1, filename):
+    video = pathlib.Path.home() / 'videowindowsshare' / path1 / filename
     path = ""
-    for part in audio.parts:
+    for part in video.parts:
         if part != "/":
             path += "/" + part
     
@@ -110,10 +110,10 @@ def getAudioFilePath1(request, path1, filename):
     return response
 
 # Serve from two levels below share root.
-def getAudioFilePath2(request, path1, path2, filename):
-    audio = pathlib.Path.home() / 'sharefromwindows' / path1 / path2 / filename
+def getVideoFilePath2(request, path1, path2, filename):
+    video = pathlib.Path.home() / 'videowindowsshare' / path1 / path2 / filename
     path = ""
-    for part in audio.parts:
+    for part in video.parts:
         if part != "/":
             path += "/" + part
     
@@ -121,10 +121,10 @@ def getAudioFilePath2(request, path1, path2, filename):
     return response
 
 # Serve from three levels below share root.
-def getAudioFilePath3(request, path1, path2, path3, filename):
-    audio = pathlib.Path.home() / 'sharefromwindows' / path1 / path2 / path3 / filename
+def getVideoFilePath3(request, path1, path2, path3, filename):
+    video = pathlib.Path.home() / 'videowindowsshare' / path1 / path2 / path3 / filename
     path = ""
-    for part in audio.parts:
+    for part in video.parts:
         if part != "/":
             path += "/" + part
     
@@ -133,9 +133,9 @@ def getAudioFilePath3(request, path1, path2, path3, filename):
 
 # This returns path/title to support auto-play of next track.
 def getPathTitle(request, pk):
-    audio = get_object_or_404(Audio, pk=pk)
+    video = get_object_or_404(Video, pk=pk)
     data = {
-        'path': audio.path,
-        'title': audio.title
+        'path': video.path,
+        'title': video.title
     }
     return JsonResponse(data)

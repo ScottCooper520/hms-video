@@ -26,11 +26,11 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('audios/', include('audios.urls')),
+    path('videos/', include('videos.urls')),
 ]
 
 urlpatterns += [
-    path('', RedirectView.as_view(url='audios/', permanent=True)),
+    path('', RedirectView.as_view(url='videos/', permanent=True)),
     # Testing... path('', RedirectView.as_view(url='audios/audios/', permanent=True)),
 ]
 

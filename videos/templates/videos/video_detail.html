@@ -1,17 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <!-- <h3>Title: {{ audio.title }}</h3> -->
 
-  <!-- <p><strong>Author:</strong> <a href="{% url 'author-detail' audio.author.pk %}">{{ audio.author }}</a></p>  -->
-  <p><strong>Title:</strong> <a href="">{{ audio.title }}</a></p> 
+  <p><strong>Title:</strong> <a href="">{{ video.title }}</a></p> 
 
-  <!-- <audio preload="auto" controls>
-    <source id="audioSource" src=""></source>
-  </audio> -->
-
-  <video id="vid" preload="auto" autoplay controls>
-    <source id="audioSource" src=""></source>
+  <video id="vid" preload="auto" controls>
+    <source id="videoSource" src=""></source>
   </video>
 
   <div class="buffered">
@@ -25,7 +19,7 @@
   <!-- Send the path & title to the JS function, and use it to build url to audio -->
   <!-- Invoke this with trigger so no need for actual button. Use audio control -->
   <button id="buttonId1" type="button" class="btn btn-info" style="display: none;"
-    onclick='playMusic("{{audio.pk}}", "{{audio.path}}", "{{ audio.title }}")'>Play Audio</button>
+    onclick='playMusic("{{video.pk}}", "{{video.path}}", "{{ video.title }}")'>Play Video</button>
 
   <div>
   <button id="buttonId2" type="button" class="btn btn-info"
@@ -45,8 +39,8 @@
     
 <script>
   // Self-invoke to activate click handler above.
-  (function playAudio() {
-    console.log("Now playing audio.");
+  (function playVideo() {
+    console.log("Now playing video.");
     $("#buttonId1").trigger('click');
   })();
 
@@ -54,13 +48,13 @@
   // So, browser url 127.0.0.1:8000/audios/audios/# renders this template (with relevant model instance).
   // This model instance is used to get the title, and that is used for the url to get the audio. 
   function playMusic(pk, path, title) {
-    // let baseUrl = "http://127.0.0.1:8000/audios/";        // For laptop testing
-    let baseUrl = "http://192.168.1.25:8000/audios/";  // For home server
-    let source = document.getElementById("audioSource");
+    let baseUrl = "http://127.0.0.1:8020/videos/";      // Laptop testing 
+//    let baseUrl = "http://192.168.1.25:8000/videos/";  // For home server
+    let source = document.getElementById("videoSource");
     if (!path || path == "None") {
       path = "";
     }
-    track = baseUrl + "getaudio/" + path + "/" + title;
+    track = baseUrl + "getvideo/" + path + "/" + title;
     if (track) {
       source.src = track;
     }
@@ -130,17 +124,17 @@
   // function runDebug() {
 
     //var myAudio = document.getElementById('my-audio');
-    let myAudio = document.getElementsByTagName("video")[0];
-    let duration = myAudio.duration;
+    let myVideo = document.getElementsByTagName("video")[0];
+    let duration = myVideo.duration;
     let data2 = $("#debugData2");
     data2.html("<br>");
     data2.append("duration = " + duration + "<br>"); 
-    myAudio.addEventListener('progress', function () {
+    myVideo.addEventListener('progress', function () {
       data2.html("<br>");
       // let duration = myAudio.duration;
       data2.append("duration = " + duration + "<br>");
-      data2.append("buffered length = " + myAudio.buffered.length + "<br>");
-      updateBuffered(myAudio);
+      data2.append("buffered length = " + myVideo.buffered.length + "<br>");
+      updateBuffered(myVideo);
       // if (duration > 0) {
       //   for (var i = 0; i < myAudio.buffered.length; i++) {
       //     if (myAudio.buffered.start(myAudio.buffered.length - 1 - i) < myAudio.currentTime) {
@@ -152,21 +146,21 @@
       // }
     });
 
-    myAudio.addEventListener('timeupdate', function () {
-      let duration = myAudio.duration;
-      console.log("timeupdate duration = " + myAudio.duration);
+    myVideo.addEventListener('timeupdate', function () {
+      let duration = myVideo.duration;
+      console.log("timeupdate duration = " + myVideo.duration);
       if (duration > 0) {
-        document.getElementById('progress-amount').style.width = ((myAudio.currentTime / duration) * 100) + "%";
+        document.getElementById('progress-amount').style.width = ((myVideo.currentTime / duration) * 100) + "%";
         //ok data2.append("progress amount = " + ((myAudio.currentTime / duration) * 100) + "%");
-        updateBuffered(myAudio);
+        updateBuffered(myVideo);
       }
     });
 
-    function updateBuffered(myAudio) {
+    function updateBuffered(myVideo) {
       if (duration > 0) {
-        for (var i = 0; i < myAudio.buffered.length; i++) {
-          if (myAudio.buffered.start(myAudio.buffered.length - 1 - i) < myAudio.currentTime) {
-            document.getElementById('buffered-amount').style.width = ((myAudio.buffered.end(myAudio.buffered.length - 1 - i) / duration) * 100) + "%";
+        for (var i = 0; i < myVideo.buffered.length; i++) {
+          if (myVideo.buffered.start(myVideo.buffered.length - 1 - i) < myVideo.currentTime) {
+            document.getElementById('buffered-amount').style.width = ((myVideo.buffered.end(myVideo.buffered.length - 1 - i) / duration) * 100) + "%";
             // data2.append("buffered amount = " + ((myAudio.buffered.end(myAudio.buffered.length - 1 - i) / duration) * 100) + "%");
             break;
           }

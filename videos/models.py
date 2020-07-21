@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 # Thinking about this a little, and need to settle on a schema.
-# The audio files will be stored in a directory structure. Something like:
+# The video files will be stored in a directory structure. Something like:
 # Conan > ComingOfConanTheCimmerian > FrostGiantsDaughter
 # So, my thought is that this would be represented in the database like:
 # title = FrostGiantsDaughter
@@ -12,7 +12,7 @@ from django.urls import reverse
 # pathSeg2 = ComingOfConanTheCimmerian
 # 
 
-class Audio(models.Model):
+class Video(models.Model):
     # Name of the audio. 
     # E.g. thefrostgiantsdaughter
     title = models.CharField(max_length=200)
@@ -20,13 +20,13 @@ class Audio(models.Model):
     # E.g. thecomingofconanthecimmerian
     path = models.CharField(max_length=400, blank=True, null=True)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
-    bodytext = models.TextField('Audio Content', blank=True, null=True)
+    bodytext = models.TextField('Video Content', blank=True, null=True)
     # audio_track = models.FileField(upload_to='audio_tracks', blank=True, null=True)
     # track = models.FileField(upload_to='tracks', blank=True, null=True)
 
     # This returns the id/pk for the active audio object.
     # This id is in turn used to return the audio object to the audio_detail file.
-    def get_audio_id(self):
+    def get_video_id(self):
         # return reverse('audio_detail', args=[str(self.id)])
         # E.g. return 2
         return str(self.id)

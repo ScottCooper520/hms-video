@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Audio-Video Library</title>{% endblock %}
+  {% block title %}<title>Video Library</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script
@@ -27,7 +27,7 @@
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'audios' %}">All audio files</a></li>
+          <li><a href="{% url 'videos' %}">All video files</a></li>
           <li><a href="{% url 'authors' %}">All authors</a></li>
         </ul>
      {% endblock %}

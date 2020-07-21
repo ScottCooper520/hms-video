@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Video Library Home</h1>
+  <p>Welcome to VideoLibrary, a website developed by <em>CoopCraft</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The video library has the following record counts:</p>
+  <ul>
+    <li><strong>Videos:</strong> {{ num_videos }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>
+{% endblock %}

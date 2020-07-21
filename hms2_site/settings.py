@@ -26,7 +26,7 @@ SECRET_KEY = 'upxvb+dgff5!k(fv*d5byy2i_3_jxrpnci@(qakmf)^+djbrtu'
 DEBUG = True
 
 # Localhost, linuxserver (nuc), linuxserver (latitude)
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.25', '192.168.1.16']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.23', '192.168.1.16']
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'audios',
+    'videos',
 ]
 
 MIDDLEWARE = [
@@ -141,7 +141,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'audios/static'),
+    os.path.join(BASE_DIR, 'videos/static'),
 ]
 
 # Can I have separate media folders for music and videos?

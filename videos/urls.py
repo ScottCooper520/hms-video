@@ -17,9 +17,9 @@ urlpatterns = [
     # path('audios/<int:pk>', views.audio_detail, name='audio-detail'),
 
     # Following work with class-based views in views.py
-    path('audios/', views.AudioListView.as_view(), name='audios'),
+    path('videos/', views.VideoListView.as_view(), name='videos'),
     # Tutorial shows 'audio/<int:pk>', not audios. But clicking on audio in list => audios/#
-    path('audios/<int:pk>', views.AudioDetailView.as_view(), name='audio-detail'),
+    path('videos/<int:pk>', views.VideoDetailView.as_view(), name='video-detail'),
 
     # Following do not change for either implementation above.
     path('authors/', views.AuthorListView.as_view(), name='authors'),
@@ -38,13 +38,13 @@ urlpatterns = [
     # OK path ('getaudio/<str:filename>/', views.getAudioFile, name='getAudioFile'),
     # OK path ('getaudio/<str:path1>/<str:path2>/<str:filename>/', views.getAudioFile, name='getAudioFile'),
     # Audio from share root folder.
-    path ('getaudio/<str:filename>/', views.getAudioFilePath0, name='getAudioFilePath0'),
+    path ('getvideo/<str:filename>/', views.getVideoFilePath0, name='getVideoFilePath0'),
     # Audio from level 1 folder in share root.
-    path ('getaudio/<str:path1>/<str:filename>/', views.getAudioFilePath1, name='getAudioFilePath1'),
+    path ('getvideo/<str:path1>/<str:filename>/', views.getVideoFilePath1, name='getVideoFilePath1'),
     # Audio from level 2 folder in share root.
-    path ('getaudio/<str:path1>/<str:path2>/<str:filename>/', views.getAudioFilePath2, name='getAudioFilePath2'),
+    path ('getvideo/<str:path1>/<str:path2>/<str:filename>/', views.getVideoFilePath2, name='getVideoFilePath2'),
     # Audio from level 3 folder in share root.
-    path ('getaudio/<str:path1>/<str:path2>/<str:path3>/<str:filename>/', views.getAudioFilePath3, name='getAudioFilePath3'),
+    path ('getvideo/<str:path1>/<str:path2>/<str:path3>/<str:filename>/', views.getVideoFilePath3, name='getVideoFilePath3'),
     # Get audio path/title given pk. Used to play next audio automatically.
     path ('getPathTitle/<int:pk>', views.getPathTitle, name='getPathTitle'),
 ]

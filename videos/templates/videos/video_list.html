@@ -10,7 +10,7 @@
   // The above schema will be mandated on all audios, even if they have no subcats.
   // See C:\BackupWork\ProjectsAllBak\KendoTests\PanelBarHierarchicalData\index2.html 
   // for a working example of the object structure with sample audio titles. 
-  let audioList = [];
+  let videoList = [];
   let categoryName = ""; // Category is mandatory, so no default.
   let subcats1Name = "";
   let subcats2Name = "";
@@ -74,38 +74,38 @@
   }
 
   function addCategory(categoryName) {
-    audioList.push({});
-    audioList[audioList.length-1]["CategoryName"] = categoryName;
-    audioList[audioList.length-1]["Subcats1"] = [];
+    videoList.push({});
+    videoList[videoList.length-1]["CategoryName"] = categoryName;
+    videoList[videoList.length-1]["Subcats1"] = [];
     subcats1Name = "";
   }
 
   function addSubcat1(categoryName, subcats1Name) {
-    let catIndex = audioList.length-1;
-    audioList[catIndex]["Subcats1"].push({}); 
-    let subcat1Index = audioList[catIndex].Subcats1.length-1;
-    audioList[catIndex].Subcats1[subcat1Index]["Subcats1Name"] = subcats1Name;
-    audioList[catIndex].Subcats1[subcat1Index]["Subcats2"] = [];
+    let catIndex = videoList.length-1;
+    videoList[catIndex]["Subcats1"].push({}); 
+    let subcat1Index = videoList[catIndex].Subcats1.length-1;
+    videoList[catIndex].Subcats1[subcat1Index]["Subcats1Name"] = subcats1Name;
+    videoList[catIndex].Subcats1[subcat1Index]["Subcats2"] = [];
     subcats2Name = "";
   }
 
   function addSubcat2(categoryName, subcats1Name, subcats2Name) {
-    let catIndex = audioList.length-1;
-    let subcat1Index = audioList[catIndex].Subcats1.length-1;
-    audioList[catIndex].Subcats1[subcat1Index]["Subcats2"].push({});
-    let subcat2Index = audioList[catIndex].Subcats1[subcat1Index].Subcats2.length-1;
-    audioList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Subcats2Name"] = subcats2Name;
-    audioList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Titles"] = [];
+    let catIndex = videoList.length-1;
+    let subcat1Index = videoList[catIndex].Subcats1.length-1;
+    videoList[catIndex].Subcats1[subcat1Index]["Subcats2"].push({});
+    let subcat2Index = videoList[catIndex].Subcats1[subcat1Index].Subcats2.length-1;
+    videoList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Subcats2Name"] = subcats2Name;
+    videoList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Titles"] = [];
   }
 
   function addTitle(id, title) {
-    let catIndex = audioList.length-1;
-    let subcat1Index = audioList[catIndex].Subcats1.length-1;
-    let subcat2Index = audioList[catIndex].Subcats1[subcat1Index].Subcats2.length-1;
-    if (audioList[catIndex].Subcats1 && audioList[catIndex].Subcats1.length > 0
-      && audioList[catIndex].Subcats1[subcat1Index].Subcats2
-      && audioList[catIndex].Subcats1[subcat1Index].Subcats2.length > 0) {
-      audioList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Titles"].push({ "url": id, "Title": title });
+    let catIndex = videoList.length-1;
+    let subcat1Index = videoList[catIndex].Subcats1.length-1;
+    let subcat2Index = videoList[catIndex].Subcats1[subcat1Index].Subcats2.length-1;
+    if (videoList[catIndex].Subcats1 && videoList[catIndex].Subcats1.length > 0
+      && videoList[catIndex].Subcats1[subcat1Index].Subcats2
+      && videoList[catIndex].Subcats1[subcat1Index].Subcats2.length > 0) {
+        videoList[catIndex].Subcats1[subcat1Index].Subcats2[subcat2Index]["Titles"].push({ "url": id, "Title": title });
     }
   }
 
@@ -136,7 +136,7 @@
     };
 
     var categoriesDataSource = new kendo.data.HierarchicalDataSource({
-      data: audioList,
+      data: videoList,
       // sort: { field}
       schema: {
         model: {
@@ -153,13 +153,13 @@
   }
 </script>
 
-<div id="avlist">
+<div id="videolist">
   <div class="demo-section k-content">
-    <h4><a href="{% url 'audios' %}">Audios & Videos</a></h4>
+    <h4><a href="{% url 'videos' %}">Videos</a></h4>
     <div id="panelbar-left"></div>
   </div>
   <style>
-    #avlist {
+    #videolist {
       text-align: left;
       margin-bottom: 40px;
     }
@@ -174,13 +174,13 @@
   </style>
 </div>
 
-<!-- Use 'audios' below instead of 'audio_list' when using non-class (function) views -->
-{% if audio_list %}
-{% for audio in audio_list %}
-  <script>getData("{{audio.get_audio_id}}", "{{audio.path}}", "{{audio.title}}")</script>
+<!-- Use 'videos' below instead of 'audio_list' when using non-class (function) views -->
+{% if video_list %}
+{% for video in video_list %}
+  <script>getData("{{video.get_video_id}}", "{{video.path}}", "{{video.title}}")</script>
 {% endfor %}
 <script>showPanelBar()</script>
 {% else %}
-<p>There are no audio files in the library.</p>
+<p>There are no video files in the library.</p>
 {% endif %}
 {% endblock %}
