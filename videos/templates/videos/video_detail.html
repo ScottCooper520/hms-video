@@ -48,8 +48,8 @@
   // So, browser url 127.0.0.1:8000/audios/audios/# renders this template (with relevant model instance).
   // This model instance is used to get the title, and that is used for the url to get the audio. 
   function playMusic(pk, path, title) {
-    let baseUrl = "http://127.0.0.1:8020/videos/";      // Laptop testing 
-//    let baseUrl = "http://192.168.1.25:8000/videos/";  // For home server
+//    let baseUrl = "http://127.0.0.1:8020/videos/";      // Laptop testing 
+    let baseUrl = "http://192.168.1.23:8020/videos/";  // For home server
     let source = document.getElementById("videoSource");
     if (!path || path == "None") {
       path = "";
